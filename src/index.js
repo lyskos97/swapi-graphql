@@ -1,11 +1,8 @@
 import express from 'express';
-
-const expressGraphQL = require('express-graphql');
-const schema = require('./schema');
+import expressGraphQL from 'express-graphql';
+import schema from './schema';
 
 const app = express();
-
-app.all('/graphql', (req, res) => res.redirect('/'));
 
 app.use(
   '/',

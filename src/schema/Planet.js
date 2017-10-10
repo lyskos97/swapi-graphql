@@ -1,15 +1,16 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
 import { loadBulk } from './utils';
-import PeopleType from './People';
+import PersonType from './Person';
+import FilmType from './Film';
 
-const HomeworldType = new GraphQLObjectType({
-  name: 'Homeworld',
+const PlanetType = new GraphQLObjectType({
+  name: 'Planet',
   fields: () => ({
     name: { type: GraphQLString },
     climate: { type: GraphQLString },
     residents: { type: new GraphQLList(GraphQLString) },
     residentList: {
-      type: new GraphQLList(PeopleType),
+      type: new GraphQLList(PersonType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 5 },
       },
@@ -20,7 +21,12 @@ const HomeworldType = new GraphQLObjectType({
         return loadBulk(source.residents);
       },
     },
+    films: { type: new GraphQLList(GraphQLString) },
+    filmsObjArr: {
+      type: new GraphQLList(FilmType),
+      resolve: source => loadBulk(source.films),
+    },
   }),
 });
 
-export default HomeworldType;
+export default PlanetType;
