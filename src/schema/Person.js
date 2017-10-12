@@ -17,28 +17,46 @@ const PersonType = new GraphQLObjectType({
     eye_color: { type: GraphQLString },
     birth_year: { type: GraphQLString },
     gender: { type: GraphQLString },
-    homeworld: { type: GraphQLString },
-    homeworldObj: {
+    homeworldUrl: {
+      type: GraphQLString,
+      resolve: source => source.homeworld,
+    },
+    filmUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.films,
+    },
+    vehicleUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.vehicles,
+    },
+    starshipUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.starships,
+    },
+    speciesUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.species,
+    },
+    created: { type: GraphQLString },
+    edited: { type: GraphQLString },
+    url: { type: GraphQLString },
+    homeworld: {
       type: PlanetType,
       resolve: source => loadData(source.homeworld),
     },
-    films: { type: new GraphQLList(GraphQLString) },
-    filmsObjArr: {
+    films: {
       type: new GraphQLList(FilmType),
       resolve: source => loadBulk(source.films),
     },
-    species: { type: new GraphQLList(GraphQLString) },
-    speciesList: {
+    species: {
       type: new GraphQLList(SpeciesType),
       resolve: source => loadBulk(source.species),
     },
-    vehicles: { type: new GraphQLList(GraphQLString) },
-    vehiclesList: {
+    vehicles: {
       type: new GraphQLList(VehicleType),
       resolve: source => loadBulk(source.vehicles),
     },
-    starships: { type: new GraphQLList(GraphQLString) },
-    starshipsList: {
+    starships: {
       type: new GraphQLList(StarshipType),
       resolve: source => loadBulk(source.starships),
     },

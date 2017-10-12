@@ -9,9 +9,29 @@ const SpeciesType = new GraphQLObjectType({
   fields: () => ({
     name: { type: GraphQLString },
     classification: { type: GraphQLString },
+    designation: { type: GraphQLString },
+    average_height: { type: GraphQLString },
+    skin_colors: { type: GraphQLString },
+    hair_colors: { type: GraphQLString },
+    eye_colors: { type: GraphQLString },
+    average_lifespan: { type: GraphQLString },
     language: { type: GraphQLString },
-    people: { type: new GraphQLList(GraphQLString) },
-    peopleList: {
+    created: { type: GraphQLString },
+    edited: { type: GraphQLString },
+    url: { type: GraphQLString },
+    characterUrls: {
+      type: GraphQLString,
+      resolve: source => source.homeworld,
+    },
+    peopleUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.people,
+    },
+    filmUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.films,
+    },
+    people: {
       type: new GraphQLList(PersonType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 5 },
@@ -23,13 +43,11 @@ const SpeciesType = new GraphQLObjectType({
         return loadBulk(source.people);
       },
     },
-    films: { type: new GraphQLList(GraphQLString) },
-    filmsObjArr: {
+    films: {
       type: new GraphQLList(FilmType),
       resolve: source => loadBulk(source.films),
     },
-    homeworld: { type: GraphQLString },
-    homeworldObj: {
+    homeworld: {
       type: PlanetType,
       resolve: source => loadData(source.homeworld),
     },

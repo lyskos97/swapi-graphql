@@ -8,8 +8,25 @@ const PlanetType = new GraphQLObjectType({
   fields: () => ({
     name: { type: GraphQLString },
     climate: { type: GraphQLString },
-    residents: { type: new GraphQLList(GraphQLString) },
-    residentList: {
+    rotation_period: { type: GraphQLString },
+    orbital_period: { type: GraphQLString },
+    diameter: { type: GraphQLString },
+    gravity: { type: GraphQLString },
+    terrain: { type: GraphQLString },
+    surface_water: { type: GraphQLString },
+    population: { type: GraphQLString },
+    created: { type: GraphQLString },
+    edited: { type: GraphQLString },
+    url: { type: GraphQLString },
+    residentUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.residents,
+    },
+    filmUrls: {
+      type: new GraphQLList(GraphQLString),
+      resolve: source => source.films,
+    },
+    residents: {
       type: new GraphQLList(PersonType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 5 },
@@ -21,8 +38,7 @@ const PlanetType = new GraphQLObjectType({
         return loadBulk(source.residents);
       },
     },
-    films: { type: new GraphQLList(GraphQLString) },
-    filmsObjArr: {
+    films: {
       type: new GraphQLList(FilmType),
       resolve: source => loadBulk(source.films),
     },

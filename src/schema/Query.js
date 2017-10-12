@@ -31,6 +31,13 @@ const QueryType = new GraphQLObjectType({
         return data;
       },
     },
+    planet: {
+      type: PlanetType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (_, args) => loadData(`https://swapi.co/api/planets/${args.id}/`),
+    },
     planets: {
       type: new GraphQLList(PlanetType),
       args: {
@@ -43,6 +50,13 @@ const QueryType = new GraphQLObjectType({
         }
         return data;
       },
+    },
+    film: {
+      type: FilmType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (_, args) => loadData(`https://swapi.co/api/films/${args.id}/`),
     },
     films: {
       type: new GraphQLList(FilmType),
@@ -57,6 +71,13 @@ const QueryType = new GraphQLObjectType({
         return data;
       },
     },
+    singleSpecies: {
+      type: SpeciesType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (_, args) => loadData(`https://swapi.co/api/species/${args.id}/`),
+    },
     species: {
       type: new GraphQLList(SpeciesType),
       args: {
@@ -70,6 +91,13 @@ const QueryType = new GraphQLObjectType({
         return data;
       },
     },
+    starship: {
+      type: StartshipType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (_, args) => loadData(`https://swapi.co/api/starships/${args.id}/`),
+    },
     starships: {
       type: new GraphQLList(StartshipType),
       args: {
@@ -82,6 +110,13 @@ const QueryType = new GraphQLObjectType({
         }
         return data;
       },
+    },
+    vehicle: {
+      type: VehicleType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve: (_, args) => loadData(`https://swapi.co/api/vehicles/${args.id}/`),
     },
     vehicles: {
       type: new GraphQLList(VehicleType),
