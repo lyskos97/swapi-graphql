@@ -20,7 +20,7 @@ const QueryType = new GraphQLObjectType({
     people: {
       type: new GraphQLList(PersonType),
       args: {
-        limit: { type: GraphQLInt, defaultValue: 5 },
+        limit: { type: GraphQLInt, defaultValue: 3 },
         offset: { type: GraphQLInt, defaultValue: 0 },
       },
       resolve: async (source, args) => {
@@ -41,12 +41,13 @@ const QueryType = new GraphQLObjectType({
     planets: {
       type: new GraphQLList(PlanetType),
       args: {
-        limit: { type: GraphQLInt, defaultValue: 5 },
+        limit: { type: GraphQLInt, defaultValue: 3 },
+        offset: { type: GraphQLInt, defaultValue: 0 },
       },
       resolve: async (source, args) => {
         const data = await loadData(`https://swapi.co/api/planets/`);
-        if (args && args.limit > 0) {
-          return data.slice(0, args.limit);
+        if (args && args.limit > 0 && args.offset >= 0) {
+          return data.slice(args.offset, args.limit + args.offset);
         }
         return data;
       },
@@ -62,11 +63,12 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(FilmType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 3 },
+        offset: { type: GraphQLInt, defaultValue: 0 },
       },
-      resolve: async (_, args) => {
+      resolve: async (source, args) => {
         const data = await loadData(`https://swapi.co/api/films/`);
-        if (args && args.limit > 0) {
-          return data.slice(0, args.limit);
+        if (args && args.limit > 0 && args.offset >= 0) {
+          return data.slice(args.offset, args.limit + args.offset);
         }
         return data;
       },
@@ -82,11 +84,12 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(SpeciesType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 3 },
+        offset: { type: GraphQLInt, defaultValue: 0 },
       },
-      resolve: async (_, args) => {
+      resolve: async (source, args) => {
         const data = await loadData(`https://swapi.co/api/species/`);
-        if (args && args.limit > 0) {
-          return data.slice(0, args.limit);
+        if (args && args.limit > 0 && args.offset >= 0) {
+          return data.slice(args.offset, args.limit + args.offset);
         }
         return data;
       },
@@ -102,11 +105,12 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(StartshipType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 3 },
+        offset: { type: GraphQLInt, defaultValue: 0 },
       },
-      resolve: async (_, args) => {
+      resolve: async (source, args) => {
         const data = await loadData(`https://swapi.co/api/starships/`);
-        if (args && args.limit > 0) {
-          return data.slice(0, args.limit);
+        if (args && args.limit > 0 && args.offset >= 0) {
+          return data.slice(args.offset, args.limit + args.offset);
         }
         return data;
       },
@@ -122,11 +126,12 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(VehicleType),
       args: {
         limit: { type: GraphQLInt, defaultValue: 3 },
+        offset: { type: GraphQLInt, defaultValue: 0 },
       },
-      resolve: async (_, args) => {
+      resolve: async (source, args) => {
         const data = await loadData(`https://swapi.co/api/vehicles/`);
-        if (args && args.limit > 0) {
-          return data.slice(0, args.limit);
+        if (args && args.limit > 0 && args.offset >= 0) {
+          return data.slice(args.offset, args.limit + args.offset);
         }
         return data;
       },
