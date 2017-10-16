@@ -9,6 +9,7 @@ import VehicleType from './Vehicle';
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
+  description: 'Root query',
   fields: () => ({
     person: {
       type: PersonType,

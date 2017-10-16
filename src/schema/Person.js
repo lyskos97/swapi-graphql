@@ -8,6 +8,7 @@ import StarshipType from './Starship';
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
+  description: 'A concrete character of the Star Wars universe',
   fields: () => ({
     name: { type: GraphQLString },
     height: { type: GraphQLString },

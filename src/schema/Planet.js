@@ -5,6 +5,7 @@ import FilmType from './Film';
 
 const PlanetType = new GraphQLObjectType({
   name: 'Planet',
+  description: 'One of the planets spotted in the series',
   fields: () => ({
     name: { type: GraphQLString },
     climate: { type: GraphQLString },

@@ -1,8 +1,11 @@
-import { GraphQLInt, GraphQLList } from 'graphql';
+import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 import fetch from 'node-fetch';
+import HttpsProxyAgent from 'https-proxy-agent';
 
 export async function loadData(url) {
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    agent: new HttpsProxyAgent(process.env.http_proxy),
+  });
   const data = await res.json();
   if (data && data.count && data.results) {
     return data.results;
@@ -20,9 +23,8 @@ export function createResolveFindListByUrl(url) {
     let data = await loadData(url);
     if (args) {
       if (args.orderBy) {
-        console.log('Hey! Need sorting by', args.orderBy);
+        data.sort();
       }
-
       if (args.offset) {
         data = data.slice(args.offset);
       }
@@ -40,7 +42,7 @@ export function createFCList({ type, url }) {
     args: {
       limit: { type: GraphQLInt, defaultValue: 3 },
       offset: { type: GraphQLInt, defaultValue: 0 },
-      orderBy: { type: GraphQLInt },
+      orderBy: { type: GraphQLString },
     },
     resolve: createResolveFindListByUrl(url),
   };
