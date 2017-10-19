@@ -1,10 +1,23 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
-import { loadData, loadBulk } from './utils';
+import { loadData, loadBulk, generateTypeFields } from './utils';
 import PlanetType from './Planet';
 import FilmType from './Film';
 import SpeciesType from './Species';
 import VehicleType from './Vehicle';
 import StarshipType from './Starship';
+
+const Person = new GraphQLObjectType({
+  name: 'Person',
+  description: 'A character of the Star Wars universe',
+  fields: () => {
+    let fields = {};
+    generateTypeFields('https://swapi.co/api/people/1/').then(res => {
+      fields = res;
+    });
+    console.log('TAAK', fields);
+    return fields;
+  },
+});
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
