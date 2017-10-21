@@ -1,12 +1,11 @@
 /* flow */
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
-import PersonType from './Person';
-import PlanetType from './Planet';
-import VehicleType from './Vehicle';
-import StarshipType from './Starship';
-import SpeciesType from './Species';
-import { loadBulk } from './utils';
+import { GraphQLObjectType } from 'graphql';
+import { generateTypeFromJSON } from './utils';
+import { film } from './swapi-objects';
 
+const FilmType = new GraphQLObjectType(generateTypeFromJSON('Film', film));
+
+/* 
 const FilmType = new GraphQLObjectType({
   name: 'Film',
   fields: () => ({
@@ -67,5 +66,5 @@ const FilmType = new GraphQLObjectType({
     url: { type: GraphQLString },
   }),
 });
-
+ */
 export default FilmType;

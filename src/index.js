@@ -1,22 +1,22 @@
+/* @flow */
 import express from 'express';
-
 import expressGraphQL from 'express-graphql';
-
 import schema from './schema';
+// import { generateTypeFromJSON } from './schema/utils';
+// import { person } from './schema/swapi-objects';
 
 const app = express();
-// app.all('/gra', (req, res) => res.redirect('/'));
 
 app.use(
   '/',
-  expressGraphQL(req => ({
+  expressGraphQL(() => ({
     schema,
-    rootValue: { a: 123, b: 567 },
     graphiql: true,
-    context: req,
   }))
 );
 
-app.listen(4000, () => {
-  console.log('Everything works on port 4000...');
+app.listen(3000, () => {
+  console.log('Everything works on port 3000...');
 });
+
+// console.log(generateTypeFromJSON('Person', person));

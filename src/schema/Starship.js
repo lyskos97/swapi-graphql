@@ -1,8 +1,11 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
-import { loadBulk } from './utils';
-import PeopleType from './Person';
-import FilmType from './Film';
+/* @flow */
+import { GraphQLObjectType } from 'graphql';
+import { generateTypeFromJSON } from './utils';
+import { starship } from './swapi-objects';
 
+const StarshipType = new GraphQLObjectType(generateTypeFromJSON('Starship', starship));
+
+/* 
 const StarshipType = new GraphQLObjectType({
   name: 'Starship',
   fields: () => ({
@@ -43,5 +46,6 @@ const StarshipType = new GraphQLObjectType({
     url: { type: GraphQLString },
   }),
 });
+ */
 
 export default StarshipType;

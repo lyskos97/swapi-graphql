@@ -5,10 +5,13 @@
     ["transform-runtime", { "polyfill": false }]
   ],
   "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
+    [
+      "env",
+      {
+        "targets": {
+          "node": "current"
+        }
       }
-    }]
-  ],
+    ]
+  ]
 }
