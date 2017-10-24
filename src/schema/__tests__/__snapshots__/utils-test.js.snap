@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils loadData() load list of records 1`] = `
+exports[`utils loadData() loads list of records 1`] = `
 Array [
   Object {
     "birth_year": "19BBY",

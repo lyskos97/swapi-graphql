@@ -4,6 +4,7 @@ import { generateTypeFromJSON } from './utils';
 import { planet } from './swapi-objects';
 
 const PlanetType = new GraphQLObjectType(generateTypeFromJSON('Planet', planet));
+
 /* 
 const PlanetType = new GraphQLObjectType({
   name: 'Planet',
@@ -42,4 +43,5 @@ const PlanetType = new GraphQLObjectType({
   }),
 });
  */
+
 export default PlanetType;

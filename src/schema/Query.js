@@ -1,78 +1,60 @@
-import { GraphQLObjectType, GraphQLInt, GraphQLNonNull } from 'graphql';
-import { loadData, createFCList } from './utils';
+import { GraphQLObjectType } from 'graphql';
+import { createFCList, createFC } from './utils';
 import PersonType from './Person';
 import PlanetType from './Planet';
 import FilmType from './Film';
 import SpeciesType from './Species';
-import StartshipType from './Starship';
+import StarshipType from './Starship';
 import VehicleType from './Vehicle';
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
   description: 'Root query',
   fields: () => ({
-    person: {
+    person: createFC({
       type: PersonType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/people/${args.id}/`),
-    },
+      url: 'https://swapi.co/api/people/',
+    }),
     people: createFCList({
       type: PersonType,
       url: 'https://swapi.co/api/people/',
     }),
-    planet: {
+    planet: createFC({
       type: PlanetType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/planets/${args.id}/`),
-    },
+      url: 'https://swapi.co/api/planets/',
+    }),
     planets: createFCList({
       type: PlanetType,
       url: 'https://swapi.co/api/planets/',
     }),
-    film: {
+    film: createFC({
       type: FilmType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/films/${args.id}/`),
-    },
+      url: 'https://swapi.co/api/films/',
+    }),
     films: createFCList({
       type: FilmType,
       url: 'https://swapi.co/api/films/',
     }),
-    singleSpecies: {
+    speciesOne: createFC({
       type: SpeciesType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/species/${args.id}/`),
-    },
+      url: 'https://swapi.co/api/species/',
+    }),
     species: createFCList({
       type: SpeciesType,
       url: 'https://swapi.co/api/species/',
     }),
-    starship: {
-      type: StartshipType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/starships/${args.id}/`),
-    },
-    starships: createFCList({
-      type: StartshipType,
+    starship: createFC({
+      type: StarshipType,
       url: 'https://swapi.co/api/starships/',
     }),
-    vehicle: {
+    starships: createFCList({
+      type: StarshipType,
+      url: 'https://swapi.co/api/starships/',
+    }),
+    vehicle: createFC({
       type: VehicleType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLInt) },
-      },
-      resolve: (_, args) => loadData(`https://swapi.co/api/vehicles/${args.id}/`),
-    },
+      url: 'https://swapi.co/api/vehicles/',
+    }),
     vehicles: createFCList({
       type: VehicleType,
       url: 'https://swapi.co/api/vehicles/',
